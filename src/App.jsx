@@ -3,7 +3,7 @@ import Products from "./components/Products"
 
 function App() {
   return (
-    <div>
+    <div className='bg-[#150e04]' >
       <Products />
     </div>
   )

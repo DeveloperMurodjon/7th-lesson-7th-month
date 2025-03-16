@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setError, setIsLoading, setProducts } from '../lib/productsSlice'
+import ProductCard from './ProductCard'
 
 function Products() {
     const dispatch = useDispatch()
@@ -14,7 +15,7 @@ function Products() {
         const getProducts = async () => {
             dispatch(setIsLoading(true))
             try {
-                const res = await axios(`${BASE_URL}/products?limit=${limit}&skip=${page * 10}`)
+                const res = await axios(`${BASE_URL}/products/`)
                 dispatch(setProducts(res.data.products))
             }
             catch (error) {
@@ -29,8 +30,16 @@ function Products() {
 
     return (
         <div>
-            <h1>Products</h1>
-            <div>{error ? (<div><i className='fa fa-times' />Somethinh went wrong :{'('}</div>) : isLoading ? (<div className='text-center text-3xl opacity-75 py-10'><i className='fa fa-circle-notch fa-spin'></i></div>) : (<div>awd</div>)}</div>
+            <h1 className='my-4 ml-8'>Products</h1>
+            {error ? (
+                <div><i className='fa fa-times' />Something went wrong :{'('}</div>
+            ) : isLoading ? (
+                <div className='text-center text-3xl opacity-75 py-10'><i className='fa fa-circle-notch fa-spin'></i></div>
+            ) : (
+                <div className='grid grid-cols-4 gap-2 px-9'>
+                    {products?.map((p) => (<ProductCard key={p.id} product={p} />))}
+                </div>
+            )}
         </div>
     )
 }
