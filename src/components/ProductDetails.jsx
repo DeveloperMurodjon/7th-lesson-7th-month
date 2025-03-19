@@ -10,7 +10,6 @@ function ProductDetails() {
         navigate("/")
     }
 
-
     if (error) {
         return (
             <div>
