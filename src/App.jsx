@@ -1,10 +1,15 @@
 import React from 'react'
-import Products from "./components/Products"
+import { Route, Routes } from 'react-router-dom'
+import Home from './components/Home'
+import ProductDetails from './components/ProductDetails'
 
 function App() {
   return (
-    <div className='bg-[#150e04]' >
-      <Products />
+    <div>
+      <Routes>
+        <Route element={<Home />} path='/'></Route>
+        <Route element={<ProductDetails />} path='/product/:id'></Route>
+      </Routes>
     </div>
   )
 }
